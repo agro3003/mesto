@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+
+<body class="body">
+  <header class="header body__content body__content_header">
+    <img class="header__logo" src="./images/header-logo.svg" alt="Логотип Место">
+  </header>
+  <main class="content">
+    <section class="profile body__content body__content_profile">
+      <div class="profile__avatar-info">
+        <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="аватар">
+        <div class="profile__info">
+          <div class="profile__name-button-edit">
+            <h3 class="profile__name">Жак-Ив Кусто</h3>
+            <button class="profile__button-edit body__hover-link" type="button">
+              <img class="profile__button-edit-image " src="./images/profile-Edit-Button.svg" alt="кнопка изменить">
+            </button>
+          </div>
+          <p class="profile__about">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="profile__add-button body__hover-link" type="button">
+        <img class="profile__button-add-image " src="./images/profile-Add-Button.svg" alt="кнонка добавить">
+      </button>
+    </section>
+    <section class="body__content body__content_elements">
+      <div class="elements">
+        <div class="element">
+          <img class="element__foto" src="./images/element-karachaevsk.jpg" alt="фото Карачаевск">
+          <div class="element__place-name-heart">
+            <h3 class="element__name">Карачаевск-Черкесия</h3>
+            <button class="element__heart body__hover-link">
+              <img src="./images/element-heart.svg" alt="кнопка лайк">
+            </button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__foto" src="./images/element-elbrus.jpg" alt="фото Эльбрус">
+          <div class="element__place-name-heart">
+            <h3 class="element__name">Гора эльбрус</h3>
+            <button class="element__heart body__hover-link">
+              <img src="./images/element-heart.svg" alt="кнопка лайк">
+            </button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__foto" src="./images/element-donbay.jpg" alt="фото Донбай">
+          <div class="element__place-name-heart">
+            <h3 class="element__name">Домбай</h3>
+            <button class="element__heart body__hover-link">
+              <img src="./images/element-heart.svg" alt="кнопка лайк">
+            </button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__foto" src="./images/element-elbrus.jpg" alt="фото Эльбрус">
+          <div class="element__place-name-heart">
+            <h3 class="element__name">Гора эльбрус</h3>
+            <button class="element__heart body__hover-link">
+              <img src="./images/element-heart.svg" alt="кнопка лайк">
+            </button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__foto" src="./images/element-donbay.jpg" alt="фото Донбай">
+          <div class="element__place-name-heart">
+            <h3 class="element__name">Донбай</h3>
+            <button class="element__heart body__hover-link">
+              <img src="./images/element-heart.svg" alt="кнопка лайк">
+            </button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__foto" src="./images/element-karachaevsk.jpg" alt="фото Карачаевск">
+          <div class="element__place-name-heart">
+            <h3 class="element__name">Карачаевск-Черкесия</h3>
+            <button class="element__heart body__hover-link">
+              <img src="./images/element-heart.svg" alt="кнопка лайк">
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer body__content body__content_footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+
+  <div class="popup">
+    <form class="popup__container">
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <input class="popup__name" type="text" name="name" placeholder="Имя">
+      <input class="popup__about" type="text" name="about" placeholder="О себе">
+      <button class="popup__button-save body__hover-link" type="submit">Сохранить</button>
+    </form>
+    <button class="popup__button-close body__hover-link" type="button"><img class="popup__button-close-img"
+        src="./images/profile-Add-Button.svg" alt="кнопка закрыть"></button>
+  </div>
+
+  <script src="./scripts/index.js"></script>
+
+</body>
+
+</html>

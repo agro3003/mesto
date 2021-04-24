@@ -1,0 +1,9 @@
+.body__content_header {
+  margin-top: 45px;
+}
+
+@media(max-width: 340px) {
+  .body__content_header {
+    margin-top: 28px;
+  }
+}
