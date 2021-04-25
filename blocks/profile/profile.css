@@ -1,6 +1,9 @@
 .profile {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   display: flex;
   justify-content: space-between;
 }

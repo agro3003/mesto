@@ -1,6 +1,0 @@
-.body__hover-link {
-  transition: opacity 1s linear;
-}
-.body__hover-link:hover {
-  opacity: 0.6;
-}

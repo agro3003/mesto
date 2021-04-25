@@ -6,6 +6,10 @@
   border: 1px solid #FFFFFF;
   background-color: unset;
   cursor: pointer;
+  transition: opacity 1s linear;
+}
+.profile__button-edit:hover {
+  opacity: 0.6;
 }
 
 @media(max-width: 700px) {
