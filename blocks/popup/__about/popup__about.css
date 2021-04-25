@@ -1,9 +1,0 @@
-.popup__about {
-  margin-top: 30px;
-}
-
-@media(max-width: 500px) {
-  .popup__about {
-    margin-top: 30px;
-  }
-}

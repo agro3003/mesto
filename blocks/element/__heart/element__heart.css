@@ -5,8 +5,9 @@
   cursor: pointer;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   background-image: url(../../../images/element-heart.svg);
+  background-color: inherit;
   transition: opacity 1s linear;
 }
 .element__heart:hover {
