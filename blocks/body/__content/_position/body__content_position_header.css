@@ -1,9 +1,9 @@
-.body__content_header_posishion {
+.body__content_position_header {
   margin-top: 45px;
 }
 
 @media(max-width: 340px) {
-  .body__content_header_posishion {
+  .body__content_position_header {
     margin-top: 28px;
   }
 }
