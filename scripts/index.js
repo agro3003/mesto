@@ -35,7 +35,7 @@ function createCard(cardlink, cardname) {
 }
 
 function showInitialCards() {
-  initialCards.forEach((card)=> {
+  initialCards.forEach((card) => {
     elements.append(createCard(card.link, card.name));
   });
 }
@@ -103,3 +103,21 @@ function closePopupEdit() {
 popupImageClose.addEventListener('click', closePopupImage);
 popupAddClose.addEventListener('click', closePopupAdd);
 popupEditClose.addEventListener('click', closePopupEdit);
+
+
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach((item) => {
+  item.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(item)
+    }
+  });
+});
+document.addEventListener('keydown', (evt) => {
+  if(evt.key === 'Escape') {
+    popups.forEach((item) => {
+      closePopup(item)
+    });
+  }
+});
