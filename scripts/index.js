@@ -29,7 +29,7 @@ function createCard(cardlink, cardname) {
   elementCard.querySelector('.element__delete').addEventListener('click', function (del) {
     del.target.closest('.element').remove();
   });
-  elementCard.querySelector('.element__foto').addEventListener('click', openImagePopup);
+  elementCard.querySelector('.element__foto').addEventListener('click', () => openImagePopup(cardname, cardlink))
 
   return elementCard;
 }
@@ -62,6 +62,7 @@ popupEditContainer.addEventListener('submit', formSubmitHandlerEditProfile);
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function openPropfilePopup() {
@@ -70,14 +71,18 @@ function openPropfilePopup() {
   openPopup(popupEdit);
 }
 
-function openImagePopup(evt) {
-  popupImage.querySelector('.popup__foto').src = evt.target.closest('.element__foto').src;
-  popupImage.querySelector('.popup__foto').alt = evt.target.closest('.element__foto').src;
-  popupImage.querySelector('.popup__name').textContent = evt.target.closest('.element__foto').alt.slice(5);
+const popupImageName = popupImage.querySelector('.popup__name');
+const popupImageFoto = popupImage.querySelector('.popup__foto');
+
+function openImagePopup(cardlink, cardname) {
+  popupImageFoto.src = cardname;
+  popupImageFoto.alt = `фото ${cardname}`;
+  popupImageName.textContent = cardlink;
   openPopup(popupImage);
 }
 
-function openAddPopup() {
+function openAddPopup(evt) {
+  evt.preventDefault();
   openPopup(popupAdd);
 }
 
@@ -86,6 +91,7 @@ editButton.addEventListener('click', openPropfilePopup);
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
 }
 
 function closePopupAdd() {
@@ -104,7 +110,6 @@ popupImageClose.addEventListener('click', closePopupImage);
 popupAddClose.addEventListener('click', closePopupAdd);
 popupEditClose.addEventListener('click', closePopupEdit);
 
-
 const popups = document.querySelectorAll('.popup');
 
 popups.forEach((item) => {
@@ -114,10 +119,10 @@ popups.forEach((item) => {
     }
   });
 });
-document.addEventListener('keydown', (evt) => {
+
+function closePopupByEsc(evt) {
   if(evt.key === 'Escape') {
-    popups.forEach((item) => {
-      closePopup(item)
-    });
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
-});
+}
