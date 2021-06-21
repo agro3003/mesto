@@ -4,6 +4,7 @@ const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupAddClose = popupAdd.querySelector('.popup__button-close');
+const popupAddSave = popupAdd.querySelector('.popup__button');
 const popupAddContainer = popupAdd.querySelector('.popup__container');
 const popupAddName = popupAdd.querySelector('.popup__input_type_name');
 const popupAddAbout = popupAdd.querySelector('.popup__input_type_about');
@@ -61,6 +62,7 @@ function formSubmitHandlerEditProfile(evt) {
 popupEditContainer.addEventListener('submit', formSubmitHandlerEditProfile);
 
 function openPopup(popup) {
+
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
 }
@@ -81,8 +83,9 @@ function openImagePopup(cardlink, cardname) {
   openPopup(popupImage);
 }
 
-function openAddPopup(evt) {
-  evt.preventDefault();
+function openAddPopup() {
+  popupAddSave.classList.add('popup__button_disabled');//я не знаю, как атрибуты функции disableSubmitButton передать сюда, явно какой то экспорт нужен, но мы еще не проходили
+  popupAddSave.setAttribute('disabled', 'disabled');
   openPopup(popupAdd);
 }
 
@@ -121,7 +124,7 @@ popups.forEach((item) => {
 });
 
 function closePopupByEsc(evt) {
-  if(evt.key === 'Escape') {
+  if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
