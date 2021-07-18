@@ -1,3 +1,6 @@
+import { FormValidator, enableValidation } from './FormValidator.js';
+import { Card } from './Card.js';
+
 const editButton = document.querySelector('.profile__button-edit');
 const addButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
@@ -14,37 +17,22 @@ const popupEditContainer = popupEdit.querySelector('.popup__container');
 const popupEditName = popupEdit.querySelector('.popup__input_type_name');
 const popupEditAbout = popupEdit.querySelector('.popup__input_type_about');
 const elements = document.querySelector('.elements');
-const elementTemplate = document.querySelector('.element__template').content;
 const popupImage = document.querySelector('.popup_type_image');
 const popupImageClose = popupImage.querySelector('.popup__button-close');
 
-function createCard(cardlink, cardname) {
-  const elementCard = elementTemplate.cloneNode(true);
-  elementCard.querySelector('.element__foto').src = cardlink;
-  elementCard.querySelector('.element__foto').alt = `фото ${cardname}`;
-  elementCard.querySelector('.element__name').textContent = cardname;
 
-  elementCard.querySelector(".element__heart").addEventListener('click', (like) => {
-    like.target.classList.toggle('element__heart_active');
-  });
-  elementCard.querySelector('.element__delete').addEventListener('click', function (del) {
-    del.target.closest('.element').remove();
-  });
-  elementCard.querySelector('.element__foto').addEventListener('click', () => openImagePopup(cardname, cardlink))
-
-  return elementCard;
-}
-
-function showInitialCards() {
-  initialCards.forEach((card) => {
-    elements.append(createCard(card.link, card.name));
+function showInitialCards(arr) {
+  arr.forEach((card) => {
+    const ArrInitialCards = new Card(card.link, card.name, '.element__template', openImagePopup);
+    elements.append(ArrInitialCards.createCard());
   });
 }
-showInitialCards();
+showInitialCards(initialCards);
 
 function initialCardAddElelmen(evt) {
   evt.preventDefault();
-  elements.prepend(createCard(popupAddAbout.value, popupAddName.value));
+  const AddInitialCard = new Card(popupAddAbout.value, popupAddName.value, '.element__template', openImagePopup)
+  elements.prepend(AddInitialCard.createCard());
   closePopupAdd();
   popupAddAbout.value = '';
   popupAddName.value = '';
@@ -62,7 +50,6 @@ function formSubmitHandlerEditProfile(evt) {
 popupEditContainer.addEventListener('submit', formSubmitHandlerEditProfile);
 
 function openPopup(popup) {
-
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
 }
@@ -84,10 +71,11 @@ function openImagePopup(cardlink, cardname) {
 }
 
 function openAddPopup() {
-  popupAddSave.classList.add('popup__button_disabled');//я не знаю, как атрибуты функции disableSubmitButton передать сюда, явно какой то экспорт нужен, но мы еще не проходили
+  popupAddSave.classList.add('popup__button_disabled');
   popupAddSave.setAttribute('disabled', 'disabled');
   openPopup(popupAdd);
 }
+
 
 addButton.addEventListener('click', openAddPopup);
 editButton.addEventListener('click', openPropfilePopup);
@@ -129,3 +117,9 @@ function closePopupByEsc(evt) {
     closePopup(openedPopup);
   }
 }
+
+const popupAddFormValidation = new FormValidator (enableValidation, popupAdd)
+popupAddFormValidation.enableValidation();
+
+const popupEditFormValidation = new FormValidator (enableValidation, popupEdit)
+popupEditFormValidation.enableValidation();
