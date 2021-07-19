@@ -71,7 +71,7 @@ function openImagePopup(cardlink, cardname) {
 }
 
 function openAddPopup() {
-  popupAddSave.classList.add('popup__button_disabled');
+  popupAddSave.classList.add('popup__button_disabled'); //Отключение кнопки лучше реализовать с помощью класса валидации. - я бы так и сделал, но согласно тз, все классы приватные, кроме enableValidation
   popupAddSave.setAttribute('disabled', 'disabled');
   openPopup(popupAdd);
 }
@@ -85,21 +85,12 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupByEsc);
 }
 
-function closePopupAdd() {
+popupImageClose.addEventListener('click', () => closePopup(popupImage));
+popupAddClose.addEventListener('click', () => {
   closePopup(popupAdd);
-}
-
-function closePopupImage() {
-  closePopup(popupImage);
-};
-
-function closePopupEdit() {
-  closePopup(popupEdit);
-};
-
-popupImageClose.addEventListener('click', closePopupImage);
-popupAddClose.addEventListener('click', closePopupAdd);
-popupEditClose.addEventListener('click', closePopupEdit);
+  popupAdd.querySelector('.popup__form').reset();
+});
+popupEditClose.addEventListener('click', () => closePopup(popupEdit));
 
 const popups = document.querySelectorAll('.popup');
 
