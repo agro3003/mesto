@@ -5,29 +5,28 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body class="body">
   <header class="header body__content body__content_position_header">
-    <img class="header__logo" src="./images/header-logo.svg" alt="Логотип Место">
+    <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Логотип Место">
   </header>
   <main class="content">
     <section class="profile body__content body__content_position_profile">
       <div class="profile__avatar-info">
-        <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="аватар">
+        <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="аватар">
         <div class="profile__info">
           <div class="profile__name-button-edit">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button class="profile__button-edit" type="button">
-              <img class="profile__button-edit-image " src="./images/profile-Edit-Button.svg" alt="кнопка изменить">
+              <img class="profile__button-edit-image " src="<%=require('./images/profile-Edit-Button.svg')%>" alt="кнопка изменить">
             </button>
           </div>
           <p class="profile__about">Исследователь океана</p>
         </div>
       </div>
       <button class="profile__add-button" type="button">
-        <img class="profile__button-add-image " src="./images/profile-Add-Button.svg" alt="кнонка добавить">
+        <img class="profile__button-add-image " src="<%=require('./images/profile-Add-Button.svg')%>" alt="кнонка добавить">
       </button>
     </section>
     <section class="body__content body__content_position_elements">
@@ -41,7 +40,7 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__button-close" type="button"><img class="popup__button-close-img"
-          src="./images/profile-Add-Button.svg" alt="кнопка закрыть"></button>
+          src="<%=require('./images/profile-Add-Button.svg')%>" alt="кнопка закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="popup-form" novalidate>
         <input id="name" class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" minlength="2" maxlength="40" required>
@@ -55,12 +54,12 @@
   <div class="popup popup_type_add">
     <div class="popup__container">
       <button class="popup__button-close" type="button"><img class="popup__button-close-img"
-          src="./images/profile-Add-Button.svg" alt="кнопка закрыть"></button>
+          src="<%=require('./images/profile-Add-Button.svg')%>" alt="кнопка закрыть"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="popup-form" novalidate>
         <input id="place-name" class="popup__input popup__input_type_name" type="text" name="name" placeholder="Название" minlength="2" maxlength="30" required>
         <span class="popup__error popup__error_place-name"></span>
-        <input id="place-url" class="popup__input popup__input_type_about" type="url" name="url" placeholder="Ссылка на картинку" minlength="2" required>
+        <input id="place-url" class="popup__input popup__input_type_about" type="url" name="link" placeholder="Ссылка на картинку" minlength="2" required>
         <span class="popup__error popup__error_place-url"></span>
         <button class="popup__button" type="submit">Сохранить</button>
       </form>
@@ -69,7 +68,7 @@
   <div class="popup popup_type_image">
     <div class="popup__container-image">
       <button class="popup__button-close" type="button">
-        <img class="popup__button-close-img" src="./images/profile-Add-Button.svg" alt="кнопка закрыть"></button>
+        <img class="popup__button-close-img" src="<%=require('./images/profile-Add-Button.svg')%>" alt="кнопка закрыть"></button>
       <img class="popup__foto" src=" " alt=" ">
       <h2 class="popup__name"></h2>
     </div>
@@ -84,8 +83,6 @@
       </div>
     </div>
   </template>
-  <script src="./scripts/initial-cards.js"></script>
-  <script type="module"  src="./scripts/index.js"></script>
  
 </body>
 </html>

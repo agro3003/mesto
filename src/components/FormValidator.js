@@ -8,7 +8,7 @@ export const enableValidation = {
 };
 
 export class FormValidator {
-  constructor (selectors, formElement) {
+  constructor(selectors, formElement) {
     this._selectors = selectors;
     this._formElement = formElement;
     this._buttonElement = this._formElement.querySelector(this._selectors.submitButtonSelector);
@@ -21,7 +21,7 @@ export class FormValidator {
       form.addEventListener('submit', function (evt) {
         evt.preventDefault();
       });
-      
+
       this._setEventListeners(form);
     });
   }
@@ -50,7 +50,7 @@ export class FormValidator {
   _setEventListeners = () => {
 
     this._toggleButtonState();
-  
+
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
@@ -65,7 +65,7 @@ export class FormValidator {
     });
   }
 
-  _toggleButtonState =() => {
+  _toggleButtonState = () => {
     if (this._hasInvalidInput(this._inputList)) {
       this._disableSubmitButton(this._buttonElement)
     } else {
