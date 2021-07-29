@@ -1,17 +1,16 @@
-import { profileAbout, profileName } from '../utils/constants.js'
-
 export default class UserInfo {
-  constructor(info) {
-    this._info = info;
-    this._name = this._info.name;
-    this._about = this._info.about;
+  constructor({ profileName, profileAbout }) {
+    this._name = document.querySelector(profileName);
+    this._about = document.querySelector(profileAbout);
   }
-  getUserInfo(obj) {
-    obj.querySelector('.popup__input_type_name').value = profileName.textContent;
-    obj.querySelector('.popup__input_type_about').value = profileAbout.textContent;
+  getUserInfo() {
+    return {
+      name: this._name.textContent,
+      about: this._about.textContent,
+    }
   }
-  setUserInfo = () => {
-    profileName.textContent = this._name;
-    profileAbout.textContent = this._about;
+  setUserInfo({ info }) {
+    this._name.textContent = info.name;
+    this._about.textContent = info.about;
   }
 }

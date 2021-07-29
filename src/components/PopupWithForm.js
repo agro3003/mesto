@@ -3,11 +3,11 @@ import Popup from './Popup.js'
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, submitFormCallback) {
     super(popupSelector);
-    this._popupSelector = popupSelector;
     this._submitFormCallback = submitFormCallback;
+    this._inputSelector = this._popup.querySelectorAll('.popup__input');
+    this._resetForm = this._popup.querySelector('.popup__form');
   }
   _getInputValues = () => {
-    this._inputSelector = this._popupSelector.querySelectorAll('.popup__input');
     this._inputValues = {};
     this._inputSelector.forEach((item) => {
 
@@ -16,23 +16,25 @@ export default class PopupWithForm extends Popup {
     })
     return this._inputValues;
   }
+
   setEventListeners() {
-    super.setEventListener();
-    this._popupSelector.addEventListener('submit', (evt) => {
+    super.setEventListeners();
+    this._popup.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitFormCallback(this._getInputValues());
       console.log(this._inputValues);
       this.close();
-      return this._getInputValues();
     });
   }
 
   close() {
-    this._popupSelector.querySelector('.popup__form').reset();
+    this._resetForm.reset();
     super.close();
 
   }
-
-
-
+  giveInputValue = ({ info }) => {
+    this._inputSelector.forEach((item) => {
+      item.value = info[item.name];
+    })
+  }
 }
