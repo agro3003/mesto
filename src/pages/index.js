@@ -71,14 +71,6 @@ const submitFormAvatar = (data) => {
     });
 }
 
-api.getInitialInfo() 
-  .then((res) => {
-    newUserInfo.setUserInfo({ info: res });
-  })
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`);
-  });
-
 
 const submitFormAdd = (data) => {
   renderSaving(true)
@@ -122,6 +114,7 @@ Promise.all([
   ]) .then(([initialCards, userInfo]) =>{
     {
       myId = userInfo._id;
+      newUserInfo.setUserInfo({ info: userInfo });
       console.log(initialCards)
       const showInitialCards = new Section({
         items: initialCards,
