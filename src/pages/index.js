@@ -28,32 +28,9 @@ function renderDeleted(isLoading) {
   }
 }
 
-const avatarApi = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/users/me/avatar',
-  headers: {
-    authorization: 'bcab2715-cc03-4ad0-bc80-4ad69d1d7f37',
-    'Content-Type': 'application/json'
-  }
-});
-
-const userapi = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/users/me/',
-  headers: {
-    authorization: 'bcab2715-cc03-4ad0-bc80-4ad69d1d7f37',
-    'Content-Type': 'application/json'
-  }
-});
-
-const likeApi = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/cards/likes/',
-  headers: {
-    authorization: 'bcab2715-cc03-4ad0-bc80-4ad69d1d7f37',
-    'Content-Type': 'application/json'
-  }
-});
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/cards/',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/',
   headers: {
     authorization: 'bcab2715-cc03-4ad0-bc80-4ad69d1d7f37',
     'Content-Type': 'application/json'
@@ -75,13 +52,13 @@ const delCallback = (data) => {
     })
     .finally(() => {
       renderDeleted(false);
-      popupDelete.close();
+      popupDelete.close(); // так же если перести, тогда работает некоректно
     })
 }
 
 const submitFormAvatar = (data) => {
   renderSaving(true);
-  avatarApi.setAvatarInfo(data)
+  api.setAvatarInfo(data) 
     .then((res) => {
       document.querySelector(profileAvatar).src = res.avatar;
     })
@@ -90,16 +67,13 @@ const submitFormAvatar = (data) => {
     })
     .finally(() => {
       renderSaving(false);
-      formAvatar.close();
+      formAvatar.close(); // так же если перести, тогда работает некоректно
     });
 }
 
-let myId; //не уверен, что нужно переносить в константы
-
-userapi.getInitialInfo()
+api.getInitialInfo() 
   .then((res) => {
     newUserInfo.setUserInfo({ info: res });
-    myId = res._id;
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
@@ -121,39 +95,46 @@ const submitFormAdd = (data) => {
     })
     .finally(() => {
       renderSaving(false);
-      newPopupWithForm.close();
+      newPopupWithForm.close(); // здесь перенести не могу из за возникающих ошибок
     });
 }
 
 const submitFormEdit = (data) => {
   renderSaving(true);
-  userapi.setUserInfo(data)
+  api.setUserInfo(data) 
     .then((res) => {
       newUserInfo.setUserInfo({ info: res });
+      popupEditNew.close();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
     })
     .finally(() => {
       renderSaving(false);
-      popupEditNew.close();
-    });
-  newUserInfo.getUserInfo;
-}
 
-api.getInitialInfo()
-  .then((res) => {
-    const showInitialCards = new Section({
-      items: res,
-      renderer: (item) => {
-        showInitialCards.addItem(createCard(item));
-      }
-    }, elements)
-    showInitialCards.renderItems();
+    });
+}
+let myId; 
+
+Promise.all([
+  api.getInitialCards(),
+  api.getInitialInfo()
+  ]) .then(([initialCards, userInfo]) =>{
+    {
+      myId = userInfo._id;
+      console.log(initialCards)
+      const showInitialCards = new Section({
+        items: initialCards,
+        renderer: (item) => {
+          showInitialCards.addItem(createCard(item));
+        }
+      }, elements)
+      showInitialCards.renderItems();
+    }
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
-  });
+  })
 
 
 const formAvatar = new PopupWithForm(popupAvatar, submitFormAvatar)
@@ -183,7 +164,7 @@ const popupAvatarFormValidation = new FormValidator(enableValidation, document.q
 popupAvatarFormValidation.enableValidation();
 
 function createCard(item) {
-  const initialCard = new Card({ data: item }, '.element__template', popupImg.open, popupDelete.open, likeApi, myId);
+  const initialCard = new Card({ data: item }, '.element__template', popupImg.open, popupDelete.open, api, myId);
   return initialCard.createCard();
 }
 

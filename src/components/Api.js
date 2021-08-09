@@ -1,3 +1,12 @@
+const handleResponse = (res) => {
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+  return res.json();
+}
+
+
+
 export default class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -5,61 +14,48 @@ export default class Api {
   }
 
   getInitialInfo() {
-    return fetch(this._baseUrl, {
+    return fetch(this._baseUrl + 'users/me/', {
       headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
+      .then(handleResponse)
+  }
+
+  getInitialCards() {
+    return fetch(this._baseUrl + 'cards/', {
+      headers: this._headers
+    })
+      .then(handleResponse)
   }
 
   setAvatarInfo(data) {
-    return fetch(this._baseUrl, {
+    return fetch(this._baseUrl+'users/me/avatar', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ avatar: data.link })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
+    .then(handleResponse)
   }
 
   setUserInfo(data) {
-    return fetch(this._baseUrl, {
+    return fetch(this._baseUrl + 'users/me/', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ name: data.name, about: data.about })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
+    .then(handleResponse)
   }
 
   setCardInfo(data) {
-    return fetch(this._baseUrl, {
+    return fetch(this._baseUrl+'cards/', {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ name: data.name, link: data.link })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
+    .then(handleResponse)
   }
 
   deleteCard(data) {
-    return fetch(this._baseUrl + data, {
+    return fetch(this._baseUrl + 'cards/' + data, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -67,29 +63,19 @@ export default class Api {
 
 
   likeAdd(data) {
-    return fetch(this._baseUrl + data, {
+    return fetch(this._baseUrl + 'cards/likes/' + data, {
       method: 'PUT',
       headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
+    .then(handleResponse)
   }
   likeDel(data) {
-    return fetch(this._baseUrl + data, {
+    return fetch(this._baseUrl + 'cards/likes/' + data, {
       method: 'DELETE',
       headers: this._headers
 
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
+    .then(handleResponse)
   }
 
 }
